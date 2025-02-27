@@ -31,11 +31,21 @@ const formatDate = (dateString) => {
             <div
                 class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-    
 
-                    <!--                <pre>{{$page.props}}</pre>-->
 
                     <main class="mt-6">
+                        <div class="mb-3 flex gap-2 border ml-1 rounded p-2 bg-gray-100">
+
+                            <div class="">
+                                <div class="col-lg-6 col-6 border border-secondary ml-1 rounded  p-1">
+                                    <h2>Available links</h2>
+                                    <li><a href="/api/v1/users">/api/v1/users</a></li>
+                                    <li><a href="/api/v1/positions">/api/v1/positions</a></li>
+                                    <li><a href="/api/v1/users/5">/api/v1/users/5</a></li>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="mb-3 flex gap-2 border ml-1 rounded p-2 bg-gray-100">
                             <p class="font-semibold">Sort By:</p>
 
