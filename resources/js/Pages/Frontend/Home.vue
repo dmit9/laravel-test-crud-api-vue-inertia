@@ -34,11 +34,11 @@ const formatDate = (dateString) => {
 
 
                     <main class="mt-6">
-                        <div class="mb-3 flex gap-2 border ml-1 rounded p-2 bg-gray-100">
+                        <div class="mb-3 flex  border  rounded p-2 bg-gray-100">
 
                             <div class="">
                                 <div class="col-lg-6 col-6 border border-secondary ml-1 rounded  p-1">
-                                    <h2>Available links</h2>
+                                    <h2>Available API links</h2>
                                     <li><a href="/api/v1/users">/api/v1/users</a></li>
                                     <li><a href="/api/v1/positions">/api/v1/positions</a></li>
                                     <li><a href="/api/v1/users/5">/api/v1/users/5</a></li>
@@ -46,7 +46,7 @@ const formatDate = (dateString) => {
                             </div>
 
                         </div>
-                        <div class="mb-3 flex gap-2 border ml-1 rounded p-2 bg-gray-100">
+                        <div class="mb-3 flex gap-2 border  rounded p-2 bg-gray-100">
                             <p class="font-semibold">Sort By:</p>
 
                             <a :href="route('home', { sort: 'id', direction: sortField === 'id' && sortDirection === 'asc' ? 'desc' : 'asc' })"
@@ -65,6 +65,10 @@ const formatDate = (dateString) => {
                             </a>
                         </div>
 
+                        <div class="flex justify-between  mb-3 items-start">
+                            <PaginationLinks :paginator="users" />
+                        </div>
+
                         <div class="flex flex-wrap gap-2 justify-center">
                             <div v-for="user in users.data" :key="user.id" class="flex w-full lg:w-2/5">
 
@@ -77,7 +81,6 @@ const formatDate = (dateString) => {
                                                 <img
                                                     :src="user.photo ? '/storage/' + user.photo : '/storage/images/default.jpg'" />
                                             </div>
-
                                             <div class="pt-3 sm:pt-5 lg:pt-0">
                                                 <h2 class="text-xl font-semibold text-black dark:text-white">
                                                     <div>Id: {{ user.id }}</div>
@@ -101,9 +104,7 @@ const formatDate = (dateString) => {
                         </div>
 
                     </main>
-                    <div class="">
-                        <PaginationLinks :paginator="users" />
-                    </div>
+
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                     </footer>

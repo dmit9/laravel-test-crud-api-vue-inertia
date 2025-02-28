@@ -24,15 +24,22 @@ class UpdateUserRequest extends FormRequest
     {
         return [
 
-            // 'name' => ['required', 'string' ,'min:2','max:60'],
-            // 'email' => [
-            //     'required',
-            //     'email',
-            //     Rule::unique('users', 'email')->ignore($this->user), // Игнорируем текущий email
-            // ],
-            // 'phone' => ['required', 'regex:/[0-9]*$/','min:2','max:20'],
-            // 'position_id' => ['required', 'integer', 'exists:positions,id'],
-            // 'photo' => ['required', 'image', 'mimes:jpeg', 'dimensions:min_width=70,min_height=70', 'max:5120'],
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->user), 
+            ],
+            'phone' => ['required', 'regex:/[0-9]*$/', 'min:2', 'max:20'],
+            'position_id' => ['required', 'integer', 'exists:positions,id'],
+            'photo' => [
+                'nullable',
+                'sometimes', // Если фото вообще передаётся
+                'file', // Проверяем, что это файл
+                'image', // Проверяем, что это картинка
+                'dimensions:min_width=70,min_height=70',
+                'max:5120'
+            ],
         ];
     }
 }

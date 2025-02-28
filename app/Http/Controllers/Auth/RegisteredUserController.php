@@ -7,8 +7,10 @@ use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Position;
+use function Tinify\setKey;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Service\IndexService;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +18,16 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Intervention\Image\Facades\Image;
 use Illuminate\Auth\Events\Registered;
-use function Tinify\setKey;
+use App\Http\Requests\StoreUserRequest;
 
 class RegisteredUserController extends Controller
 {
+    public IndexService $IndexService;
+
+    public function __construct(IndexService $IndexService)
+    {
+        $this->IndexService = $IndexService;
+    }
     /**
      * Display the registration view.
      */
@@ -34,54 +42,11 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['required', 'regex:/[0-9]*$/','min:2','max:20'],
-            'position_id' => ['required', 'integer', 'exists:positions,id'],
-            'photo' => ['required', 'image', 'mimes:jpeg', 'dimensions:min_width=70,min_height=70', 'max:5120'],
-        ]);
+        $data = $this->IndexService->imagesCompress( $request);
 
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $filename = Str::random(15) . '.jpg';
-
-            $image = Image::make($photo->getPathname())
-                ->fit(70, 70, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->encode('jpg', 90);
-
-            $tempPath = storage_path('app/public/images/temp/' . $filename);
-            $image->save($tempPath);
-
-            setKey('1BC4cXMKstgLxcKJbWV6qnkfkzTzJ1VK');
-            $source = Source::fromFile($tempPath);
-            $optimizedPath = 'images/users/' . $filename;
-
-            $finalStoragePath = storage_path('app/public/' . $optimizedPath);
-            $source->toFile($finalStoragePath);
-            unlink($tempPath);
-
-            $publicStoragePath = public_path('storage/' . $optimizedPath);
-            $publicDir = dirname($publicStoragePath);
-            if (!file_exists($publicDir)) {
-                mkdir($publicDir, 0755, true);
-            }
-            copy($finalStoragePath, $publicStoragePath);
-        }
-        $data = [
-            'photo' => $optimizedPath,
-            'phone' => $request->phone,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'position_id' => $request->position_id,
-        ];
+        $data['password'] = Hash::make($request->password);
 
         $user = User::create($data);
 

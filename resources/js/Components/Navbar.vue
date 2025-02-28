@@ -5,8 +5,8 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <nav class="flex justify-between p-4 bg-gray-200">
         <div class="text-lg">
-            <div v-if="$page.props.auth.user">Name {{ $page.props.auth.user.name }}, 
-            Id  {{$page.props.auth.user.id }}
+            <div v-if="$page.props.auth.user">Name: {{ $page.props.auth.user.name }}, 
+            ID:  {{$page.props.auth.user.id }}
         </div>
         </div>
         <div>

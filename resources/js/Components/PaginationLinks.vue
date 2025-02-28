@@ -19,7 +19,7 @@ const makeLabel = (label) => {
 </script>
 
 <template>
-    <div class="flex justify-around mt-4 items-start">
+   
         <div class="flex items-center rounded-md overflow-hidden shadow-lg">
             <div v-for="link in paginator.links" :key="link.url">
                 <Link                   
@@ -38,5 +38,5 @@ const makeLabel = (label) => {
         <p class="text-slate-600 text-sm">
             Showing {{ paginator.from }} to {{ paginator.to }} of {{ paginator.total }}
         </p>
-    </div>
+ 
 </template>

@@ -1,20 +1,21 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { Head,Link,usePage } from "@inertiajs/vue3";
+import { Head,Link,useForm,usePage } from "@inertiajs/vue3";
 import {computed} from "vue";
 
 const props = defineProps({
     user: Object,
-    // computed: {
-    //     canEdit() {
-    //         return this.$page.props.auth.user && this.$page.props.auth.user.id === this.user.id;
-    //     }
-    // },
 });
 
 const page = usePage();
+
 const canEdit = computed  (() =>  page.props.auth.user && page.props.auth.user.id === props.user.id)
         
+const form = useForm()
+
+const deleteUser = (userId) => {
+    form.delete(route('delete',userId))
+}        
 </script>
 
 <template>
@@ -34,7 +35,7 @@ const canEdit = computed  (() =>  page.props.auth.user && page.props.auth.user.i
                 <div>Email: {{ user.email }}</div>
                 <div>Phone: {{ user.phone }}</div>
                 <div>position_id: {{ user.position_id }}</div>
-                <div :class="{ 'opacity-50 pointer-events-none': !canEdit }" class="flex">
+                <div :class="{ 'opacity-50 pointer-events-none': !canEdit }" class="flex border border-indigo-600">
                     <div>
                         <Link :href="route('edit', user.id)" :class="{ 'opacity-50 pointer-events-none': !canEdit }"
                             class="px-2 py-1 text-sm bg-green-500 text-white me-2 rounded inline-block">
@@ -42,7 +43,7 @@ const canEdit = computed  (() =>  page.props.auth.user && page.props.auth.user.i
                         </Link>
                     </div>
                     <div>
-                        <button type="submit" :disabled="!canEdit"
+                        <button type="submit" :disabled="!canEdit" @click="deleteUser(user.id)"
                             class="px-2 py-1 text-sm bg-red-500 text-white me-2 rounded inline-block">
                             Delete
                         </button>
