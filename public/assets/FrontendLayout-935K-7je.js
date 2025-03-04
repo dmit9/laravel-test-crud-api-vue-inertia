@@ -1,0 +1,1 @@
+import{_ as o}from"./Navbar-4Zk6FVPN.js";import{f as a,o as r,a as t,l as s}from"./app-COn3urlr.js";const m={__name:"FrontendLayout",setup(n){return(e,_)=>(r(),a("div",null,[t(o),s(e.$slots,"default")]))}};export{m as _};

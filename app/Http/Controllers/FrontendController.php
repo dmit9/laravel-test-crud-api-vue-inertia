@@ -69,8 +69,11 @@ class FrontendController extends Controller
 
     public function delete(User $user)
     {
-        $user->delete();
-        
-        return redirect()->to('/');
+   //   dd($user);
+    //    $user->delete();
+
+        //return redirect()->to('/');
+      //  return Inertia::location(route('home'));
+      //  return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }

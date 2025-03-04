@@ -15,9 +15,11 @@ import { Head } from '@inertiajs/vue3';
             </h2>
         </template>
 
+        <div  class=" mx-auto min-h-screen  bg-gray-100 pt-6 sm:justify-center sm:pt-0" >
+
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         You're logged in, {{ $page.props.auth.user.name }}!
                     </div>
@@ -28,7 +30,7 @@ import { Head } from '@inertiajs/vue3';
                             <div
                                 class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                 <img
-                                    :src="$page.props.auth.user.photo ? '/storage/' + $page.props.auth.user.photo : '/storage/images/default.jpg'" />
+                                    :src="$page.props.auth.user.photo ? '/public/storage/' + $page.props.auth.user.photo : '/public/storage/images/default.jpg'" />
                             </div>
                             <div>Id: {{ $page.props.auth.user.id }}</div>
                             <div>Name: {{ $page.props.auth.user.name }}</div>
@@ -39,6 +41,7 @@ import { Head } from '@inertiajs/vue3';
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </AuthenticatedLayout>
 </template>

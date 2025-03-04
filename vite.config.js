@@ -21,4 +21,8 @@ export default defineConfig({
             },
         }),
     ],
+    build: {
+        outDir: 'public',
+        emptyOutDir: false,
+    }
 });
