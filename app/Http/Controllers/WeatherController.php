@@ -9,7 +9,7 @@ use Inertia\Inertia;
 class WeatherController extends Controller
 {
     protected $apiUrl = 'https://api.openweathermap.org/data/2.5/';
-    protected $accessToken = '2367fa1baeb11c2db33f89cf4696cf95';
+    protected $accessToken = '';
 
     public function index(Request $request)
     {
