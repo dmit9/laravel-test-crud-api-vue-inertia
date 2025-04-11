@@ -24,4 +24,5 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
+    url: 'https://inertia.prototypecodetest.site',
 });

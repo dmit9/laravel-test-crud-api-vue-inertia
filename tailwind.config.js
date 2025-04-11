@@ -10,6 +10,14 @@ export default {
         './resources/js/**/*.vue',
     ],
 
+    safelist: [
+        'bg-blue-400', 'bg-blue-500', 'bg-blue-600',
+        'bg-green-400', 'bg-green-500', 'bg-green-600',
+        'bg-indigo-400', 'bg-indigo-500', 'bg-indigo-600',
+        'bg-yellow-400', 'bg-yellow-500', 'bg-yellow-600',
+  
+    ],
+
     theme: {
         extend: {
             fontFamily: {

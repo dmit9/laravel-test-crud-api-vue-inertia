@@ -34,8 +34,8 @@ onMounted(() => {
         router.get('/weather', { ...filters.value }, { preserveState: true });
     }
 });
+//const filters = ref({...props.filters});
 
-// Следим за изменениями фильтров, сохраняем и отправляем
 watch(filters, debounce((newFilters) => {
     localStorage.setItem('filters', JSON.stringify(newFilters));
     router.get('/weather', { ...newFilters }, { preserveState: true });
@@ -97,24 +97,24 @@ const chartData = computed(() => {
                     <div class="flex p-2 gap-2 flex-wrap justify-center items-center ">
                         <label for="position">Choose languare </label>
                         <div class="col-lg-6 col-6 border border-secondary ml-1 rounded  p-1 text-black">
-                            <select v-model="filters.languare" class="w-full cursor-pointer" name="languare" id="languare">
-                                <option v-for="languare in langs" :key="languare.id" :value="languare"  >
+                            <select v-model="filters.languare" class="w-full cursor-pointer" name="languare" >
+                                <option v-for="languare in langs" :key="index" :value="languare"  >
                                     {{ languare }}
                                 </option>
                             </select>
                         </div>
                         <label for="position">Choose Hours count </label>
                         <div class="col-lg-6 col-6 border border-secondary ml-1 rounded  p-1 text-black">
-                            <select v-model="filters.hours" class="w-full cursor-pointer" name="hours" id="hours">
-                                <option v-for="hours in hoursCount" :key="hours.id" :value="hours">
+                            <select v-model="filters.hours" class="w-full cursor-pointer" name="hours">
+                                <option v-for="hours in hoursCount" :key="index" :value="hours">
                                     {{ hours }}
                                 </option>
                             </select>
                         </div>
                         <label for="position">Choose City </label>
                         <div class="col-lg-6 col-6 border border-secondary ml-1 rounded  p-1 text-black">
-                            <select v-model="filters.citys" class="w-full cursor-pointer" name="citys" id="citys">
-                                <option v-for="citys in cityes" :key="citys.id" :value="citys">
+                            <select v-model="filters.citys" class="w-full cursor-pointer" name="citys">
+                                <option v-for="citys in cityes" :key="index" :value="citys">
                                     {{ citys }}
                                 </option>
                             </select>

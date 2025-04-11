@@ -20,7 +20,8 @@ return [
     'allowed_methods' => ['*'],
 
   //  'allowed_origins' => ['http://laravel-test-vue-inertia.42web.io/public/'],
-    'allowed_origins' => ['*'],
+  //  'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://inertia.prototypecodetest.site'],
 
     'allowed_origins_patterns' => [],
 

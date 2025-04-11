@@ -9,9 +9,9 @@ use Inertia\Inertia;
 class WeatherController extends Controller
 {
     protected $apiUrl = 'https://api.openweathermap.org/data/2.5/';
-    protected $accessToken = '';
+    protected $accessToken = '2367fa1baeb11c2db33f89cf4696cf95';
 
-    public function index(Request $request)
+    public function weather(Request $request)
     {
 
         $filters = [

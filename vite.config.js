@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
- import { createHtmlPlugin } from 'vite-plugin-html'
-import vueDevTools from 'vite-plugin-vue-devtools';
+// import { createHtmlPlugin } from 'vite-plugin-html'
+//import vueDevTools from 'vite-plugin-vue-devtools';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
-        vueDevTools(),
-        createHtmlPlugin({}),
+ //       vueDevTools(),
+ //       createHtmlPlugin({}),
         laravel({
             input: 'resources/js/app.js',
             refresh: true,
@@ -21,8 +21,12 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        outDir: 'public',
-        emptyOutDir: false,
-    }
+    server: {
+        https: true,
+        host: 'inertia.prototypecodetest.site',
+    },
+    // build: {
+    //     outDir: 'public/build',
+    //     emptyOutDir: false,
+    // }
 });

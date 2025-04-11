@@ -43,7 +43,7 @@ const submit = () => {
     <GuestLayout>
         <form @submit.prevent="submit">
             <div class="mt-4">
-                <img :src="props.user.photo ? '/public/storage/' + props.user.photo : '/public/storage/images/default.jpg'" />
+                <img :src="props.user.photo ? '/storage/' + props.user.photo : '/storage/images/default.jpg'" />
                 <InputLabel for="photo" value="Upload" />
                 <input type="file" @input="change" id="photo">
                 <InputError class="mt-2" :message="form.errors.photo" />

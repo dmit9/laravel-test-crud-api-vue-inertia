@@ -1,7 +1,7 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { Head,Link,useForm,usePage } from "@inertiajs/vue3";
-import {computed} from "vue";
+import { Head,Link,router,useForm,usePage } from "@inertiajs/vue3";
+import {computed, reactive} from "vue";
 
 const props = defineProps({
     user: Object,
@@ -11,21 +11,25 @@ const page = usePage();
 
 const canEdit = computed  (() =>  page.props.auth.user && page.props.auth.user.id === props.user.id)
 
+
+// const csrfToken = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+// console.log(csrfToken); // Проверяем вывод
+
+// const form = useForm()
+// const deleteUser = () => {
+//     router.delete(route('delete',props.user.id),{
+      //       _token: page.props.csrf_token}))
+    //   headers: page.props.csrf_token})
+    // router.delete('delete',props.user.id,{
+    //     _token: page.props.csrf_token})
+    // form.delete(route('delete', id), {
+    //     headers: { 'X-CSRF-TOKEN': csrfToken  }
+    // });
+    
+// };
 const form = useForm()
-
-const csrfToken = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-
-console.log(csrfToken); // Проверяем вывод
-
-
-const deleteUser = (id) => {
-    console.log(id);
-    console.log(csrfToken);
-    form.delete(route('delete', id), {
-        headers: {
-            'X-CSRF-TOKEN': csrfToken
-        }
-    });
+const submit = () => {
+    form.delete(route('delete', props.user.id));
 };
 </script>
 
@@ -39,7 +43,7 @@ const deleteUser = (id) => {
             <h2 class="text-xl font-semibold text-black dark:text-white">
 
                 <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                    <img :src="user.photo ? '/public/storage/' + user.photo : '/public/storage/images/default.jpg'" />
+                    <img :src="user.photo ? '/storage/' + user.photo : '/storage/images/default.jpg'" />
                 </div>
                 <div>Id: {{ user.id }}</div>
                 <div>Name: {{ user.name }}</div>
@@ -54,10 +58,13 @@ const deleteUser = (id) => {
                         </Link>
                     </div>
                     <div>
-                        <button type="submit" :disabled="!canEdit" @click="deleteUser(user.id)"
+                        <form @submit.prevent="submit">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <!-- <button type="button" :disabled="!canEdit" @click="deleteUser"
                             class="px-2 py-1 text-sm bg-red-500 text-white me-2 rounded inline-block">
                             Delete
-                        </button>
+                        </button> -->
                     </div>
                     <div v-if="!canEdit">
                         <div>

@@ -18,7 +18,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
  Route::get('/user/{user}/edit', [FrontendController::class, 'edit'])->name('edit');
 Route::post('/user/{user}', [FrontendController::class, 'update'])->name('update');
 Route::delete('/user/{user}', [FrontendController::class, 'delete'])->name('delete');
-Route::get('/weather', [WeatherController::class,'index'])->name('weather');
+Route::get('/weather', [WeatherController::class,'weather'])->name('weather');
 
 
 Route::get('/dashboard', function () {

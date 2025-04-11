@@ -30,7 +30,7 @@ import { Head } from '@inertiajs/vue3';
                             <div
                                 class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
                                 <img
-                                    :src="$page.props.auth.user.photo ? '/public/storage/' + $page.props.auth.user.photo : '/public/storage/images/default.jpg'" />
+                                    :src="$page.props.auth.user.photo ? '/storage/' + $page.props.auth.user.photo : '/storage/images/default.jpg'" />
                             </div>
                             <div>Id: {{ $page.props.auth.user.id }}</div>
                             <div>Name: {{ $page.props.auth.user.name }}</div>

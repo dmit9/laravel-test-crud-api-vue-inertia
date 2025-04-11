@@ -26,16 +26,33 @@ class FrontendController extends Controller
     public function index(Request $request)
     {
 
-        $sortField = $request->query('sort', 'id'); // По умолчанию сортируем по 'id'
-        $sortDirection = $request->query('direction', 'desc'); // По умолчанию 'desc' (от новых к старым)
+        $sortField = $request->query('sort', 'id');
+        $sortDirection = $request->query('direction', 'desc');
+        $searchField = $request->query('search', '');
+
+        // Валидация
+        $validSortFields = ['id', 'name', 'created_at'];
+        $sortField = in_array($sortField, $validSortFields) ? $sortField : 'id';
+        $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : 'desc';
+
         $positions = Position::all();
-        $users = User::with('position')->orderBy($sortField, $sortDirection)->paginate(6);
+        $searchField = preg_replace("#([%_?+])#", "\\$1", $searchField);
+
+        $users = User::with('position')
+            ->where(function ($query) use ($searchField) {
+                $query->where('name', 'LIKE', "%{$searchField}%")
+                    ->orWhere('email', 'LIKE', "%{$searchField}%")
+                    ->orWhere('phone', 'LIKE', "%{$searchField}%");
+            })
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(6);
 
         return Inertia::render('Frontend/Home', [
             'users' => $users,
             'positions' => $positions,
             'sortField' => $sortField,
             'sortDirection' => $sortDirection,
+            'searchField' => $searchField,
         ]);
     }
 
@@ -69,11 +86,12 @@ class FrontendController extends Controller
 
     public function delete(User $user)
     {
-   //   dd($user);
-    //    $user->delete();
+       // dd($user);
+        $user->delete();
+       // return redirect()->route('home');
 
         //return redirect()->to('/');
-      //  return Inertia::location(route('home'));
+        return Inertia::location(route('home'));
       //  return response()->json(['message' => 'User deleted successfully'], 200);
     }
 }
