@@ -15,7 +15,7 @@
     @routes
 
             <link rel="stylesheet" href="{{ asset('build/assets/app-CZcuhY7u.css') }}"> 
-            <script type="module" src="{{ asset('build/assets/app-5uX7-dNL.js') }}" defer></script> 
+            <script type="module" src="{{ asset('build/assets/app-C7Dw7w1u.js') }}" defer></script> 
 
 
         @if (app()->environment('local')) 

@@ -38,6 +38,18 @@ watch(
     { deep: true }
 )
 
+const handlePagination = (page) => {
+    router.get('/', {
+        search: search.value,
+        sort: sort.value.field,
+        direction: sort.value.direction,
+        page: page,
+    }, {
+        preserveState: true,
+        preserveScroll: true,
+    });
+};
+
 const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString('en-GB', {
@@ -107,7 +119,7 @@ const formatDate = (dateString) => {
                         </div>
 
                         <div class="flex justify-between  mb-3 items-start">
-                            <PaginationLinks :paginator="users" />
+                            <PaginationLinks :paginator="users" @page-change="handlePagination"/>
                         </div>
 
                         <div class="flex flex-wrap gap-2 justify-center">
