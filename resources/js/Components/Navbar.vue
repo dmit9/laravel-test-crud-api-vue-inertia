@@ -19,7 +19,10 @@ import { Link } from '@inertiajs/vue3';
                     <Link class="text-dark" :href="route('weather')">Weather API
                     </Link>
                 </li>
-
+                <li class="nav-item">
+                    <Link class="text-dark" :href="route('telegram')">Telegram Bot
+                    </Link>
+                </li>
                 <li v-if="!$page.props.auth.user" class="nav-item">
                     <Link class="text-dark" :href="route('login')">Login
                     </Link>

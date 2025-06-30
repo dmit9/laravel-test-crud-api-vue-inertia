@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('door_logs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('group_chats', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('chat_id')->unique();
+            $table->string('chat_name')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('door_logs');
+        Schema::dropIfExists('group_chats');
     }
 };

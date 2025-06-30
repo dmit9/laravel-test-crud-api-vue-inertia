@@ -14,15 +14,15 @@
 
     @routes
 
-            <link rel="stylesheet" href="{{ asset('build/assets/app-CZcuhY7u.css') }}"> 
-            <script type="module" src="{{ asset('build/assets/app-C7Dw7w1u.js') }}" defer></script> 
+            <link rel="stylesheet" href="{{ asset('build/assets/app-B9KdWhmy.css') }}">
+            <script type="module" src="{{ asset('build/assets/app-BUOwqfPp.js') }}" defer></script>
 
 
-        @if (app()->environment('local')) 
+        @if (app()->environment('local'))
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
-        @endif 
-    
-    
+        @endif
+
+
     @inertiaHead
 
 </head>
